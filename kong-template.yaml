@@ -27,7 +27,7 @@ objects:
       metadata:
         creationTimestamp: null
         labels:
-          app: kong
+          app: ${DATABASE_SERVICE_NAME}
           name: ${DATABASE_SERVICE_NAME}
       spec:
         containers:
