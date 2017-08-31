@@ -121,7 +121,7 @@ objects:
       spec:
         containers:
         - name: kong
-          image: "kong:${KONG_BUILD_TAG}"
+          image: "docker-registry.default.svc:5000/kong-portal/kong:latest"
           imagePullPolicy: IfNotPresent
           env:
           - name: KONG_PG_PASSWORD
@@ -190,7 +190,6 @@ objects:
       name: ${DATABASE_SERVICE_NAME}
     type: ClusterIP
     sessionAffinity: None
-
 - kind: Service
   apiVersion: v1
   metadata:
@@ -210,7 +209,6 @@ objects:
       protocol: TCP
     selector:
       app: kong
-
 - kind: Service
   apiVersion: v1
   metadata:
@@ -226,7 +224,6 @@ objects:
       protocol: TCP
     selector:
       app: kong
-
 - kind: DeploymentConfig
   apiVersion: v1
   metadata:
@@ -252,7 +249,7 @@ objects:
       spec:
         containers:
         - name: kong-dashboard
-          image: "kong-dashboard:${KONG_DASHBOARD_TAG}"
+          image: "docker-registry.default.svc:5000/kong-portal/kong-dashboard:latest"
           imagePullPolicy: IfNotPresent
           env:
           - name: KONG_HOST
@@ -291,7 +288,6 @@ objects:
           namespace: ${KONG_IMAGE_NAMESPACE}
           name: "kong-dashboard:${KONG_DASHBOARD_TAG}"
       type: ImageChange
-
 - kind: Service
   apiVersion: v1
   metadata:
@@ -307,7 +303,6 @@ objects:
       protocol: TCP
     selector:
       app: kong-dashboard
-
 parameters:
 - name: PROJECT_NAME
   displayName: Database Namespace
